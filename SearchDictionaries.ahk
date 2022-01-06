@@ -33,7 +33,7 @@ DetectHiddenWindows, On
         Sleep, 50
         Run, https://vi.wiktionary.org/wiki/%Clipboard2%
         Sleep, 50
-		Run, https://www.google.com/search?q=%Clipboard3%&tbm=isch
+        Run, https://www.google.com/search?q=%Clipboard3%&tbm=isch
         Sleep, 250
         Send, ^{Tab}
     }
@@ -62,7 +62,7 @@ Return
         Sleep, 50
         Run, https://vi.wiktionary.org/wiki/%Clipboard1%
         Sleep, 50
-		Run, https://www.google.com/search?q=%Clipboard2%&tbm=isch
+        Run, https://www.google.com/search?q=%Clipboard2%&tbm=isch
         Sleep, 250
         Send, ^{Tab}
     }
