@@ -41,7 +41,7 @@ DetectHiddenWindows, On
 Return
 
 #x::
-    InputBox, Clipboard1, Dictionaries 2, Please enter a term., , 225, 125
+    InputBox, Clipboard1, Dictionaries 2, Please enter a term:, , 225, 125
     If (ErrorLevel == 1)
         Return
     Clipboard1 := Trim(Clipboard1)
@@ -96,7 +96,7 @@ Return
 Return
 
 #+x::
-    InputBox, Clipboard1, Dictionaries 4, Please enter a term., , 225, 125
+    InputBox, Clipboard1, Dictionaries 4, Please enter a term:, , 225, 125
     If (ErrorLevel == 1)
         Return
     Clipboard1 := Trim(Clipboard1)
