@@ -117,12 +117,3 @@ Return
     }
     Send, +!{Left}
 Return
-
-; Other mappings
-#+q::WinClose, A
-#+r::Reload
-#+v::
-    Clipboard = %Clipboard%
-    Send, ^v
-    Sleep, 50
-Return

@@ -157,12 +157,3 @@ global Wait := 0
         Wait := 0
     Return
 #If
-
-; Other mappings
-#+q::WinClose, A
-#+r::Reload
-#+v::
-    Clipboard = %Clipboard%
-    Send, ^v
-    Sleep, 50
-Return

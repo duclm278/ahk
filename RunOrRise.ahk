@@ -55,9 +55,21 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
     *l::Right
 #If
 
+; Reload all
+#+r::
+    WinGet, ID, List, ahk_class AutoHotkey
+    Loop, %ID%
+    {
+        ThisID := ID%A_Index%
+        WinGetTitle, Title, % "ahk_id " ThisID
+        If InStr(Title, A_ScriptFullPath) == 0
+            PostMessage, 0x0111, 65303,,, % "ahk_id " ThisID
+    }
+    Reload
+Return
+
 ; Other mappings
 #+q::WinClose, A
-#+r::Reload
 #+v::
     Clipboard = %Clipboard%
     Send, ^v
