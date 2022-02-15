@@ -11,7 +11,7 @@ If (!A_IsAdmin)
     ExitApp
 }
 
-RegRead, DisableLockWorkstation, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation
+RegRead, Workstation, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation
 If (ErrorLevel)
 {
     RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
@@ -19,14 +19,14 @@ If (ErrorLevel)
 }
 Else
 {
-    If (DisableLockWorkstation == 0)
+    If (Workstation == 0)
     {
         RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 1
         MsgBox, 0, Warning, You have DISABLED locking workstation!
     }
     Else
     {
-        RegWrite, REG_DWORD, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, 0
+        RegDelete, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation
         MsgBox, 0, Warning, You have ENABLED locking workstation!
     }
 }
