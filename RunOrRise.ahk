@@ -16,7 +16,7 @@ If (Workstation != 1)
 }
 
 RegRead, Hotkeys, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys
-If InStr(Hotkeys, "T") == 0
+If (InStr(Hotkeys, "T") == 0)
 {
     MsgBox, 0, Warning, Please DISABLE conflicting hotkeys!
     ExitApp
@@ -70,7 +70,7 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
     {
         ThisID := ID%A_Index%
         WinGetTitle, Title, % "ahk_id " ThisID
-        If InStr(Title, A_ScriptFullPath) == 0
+        If (InStr(Title, A_ScriptFullPath) == 0)
             PostMessage, 0x0111, 65303,,, % "ahk_id " ThisID
     }
     Reload
