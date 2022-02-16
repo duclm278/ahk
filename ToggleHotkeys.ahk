@@ -11,17 +11,19 @@ If (!A_IsAdmin)
     ExitApp
 }
 
+Values := "CT"
+
 RegRead, Hotkeys, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys
 If (ErrorLevel)
 {
-    RegWrite, REG_SZ, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys, CT
+    RegWrite, REG_SZ, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys, %Values%
     MsgBox, 0, Warning, You have DISABLED conflicting hotkeys!
 }
 Else
 {
-    If (Hotkeys == 0)
+    If (Hotkeys != Values)
     {
-        RegWrite, REG_SZ, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys, CT
+        RegWrite, REG_SZ, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys, %Values%
         MsgBox, 0, Warning, You have DISABLED conflicting hotkeys!
     }
     Else
