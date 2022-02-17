@@ -46,14 +46,14 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
 }
 
 ; Function parameters      #ClassName                       #ProcessName           #Target
-#+f::RunOrRaiseRegularApps("CabinetWClass",                 "Explorer.EXE",        "explorer.exe")
-#+w::RunOrRaiseRegularApps("Chrome_WidgetWin_1",            "chrome.exe",          "chrome.exe")
-#+t::RunOrRaiseRegularApps("CASCADIA_HOSTING_WINDOW_CLASS", "WindowsTerminal.exe", "wt.exe")
+#f::RunOrRaiseRegularApps("CabinetWClass",                 "Explorer.EXE",        "explorer.exe")
+#w::RunOrRaiseRegularApps("Chrome_WidgetWin_1",            "chrome.exe",          "chrome.exe")
+#t::RunOrRaiseRegularApps("CASCADIA_HOSTING_WINDOW_CLASS", "WindowsTerminal.exe", "wt.exe")
 
 ; Launch new apps
-#f::Run, "explorer.exe"
-#w::Run, "chrome.exe"
-#t::Run, "wt.exe"
+#+f::Run, "explorer.exe"
+#+w::Run, "chrome.exe"
+#+t::Run, "wt.exe"
 
 ; Vim-like mappings
 #If, GetKeyState("LWin", "P")
