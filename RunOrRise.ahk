@@ -38,14 +38,14 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
         GroupActivate, %GroupName%, R
     Else
     {
-        ; Windows are retrieved in order from topmost to bottommost
+        ; Retrieve windows in order from topmost to bottommost
         WinGet, Windows, List, % "ahk_group " GroupName
         WinActivate, % "ahk_id " Windows%Windows%
     }
     Return
 }
 
-; Function parameters      #ClassName                       #ProcessName           #Target
+; Function parameters     #ClassName                       #ProcessName           #Target
 #f::RunOrRaiseRegularApps("CabinetWClass",                 "Explorer.EXE",        "explorer.exe")
 #w::RunOrRaiseRegularApps("Chrome_WidgetWin_1",            "chrome.exe",          "chrome.exe")
 #t::RunOrRaiseRegularApps("CASCADIA_HOSTING_WINDOW_CLASS", "WindowsTerminal.exe", "wt.exe")
@@ -77,6 +77,8 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
 Return
 
 ; Other mappings
+#a::Winset, AlwaysOnTop,, A
+
 #+q::WinClose, A
 #+v::
     Clipboard = %Clipboard%
