@@ -8,112 +8,98 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #WinActivateForce
 DetectHiddenWindows, On
 
-#z::
+; Set your browser
+global Browser := "brave.exe"
+; global Browser := "chrome.exe"
+
+; Set your arguments
+global History := "-incognito"
+global Windows := "-new-window"
+
+; Set your dictionaries
+global Groups := []
+
+Groups[1, 1] := "https://www.ldoceonline.com/search/direct/?q={2}"
+Groups[1, 2] := "https://www.collinsdictionary.com/search/?dictCode=english&q={2}"
+Groups[1, 3] := "https://www.oxfordlearnersdictionaries.com/search/english/?q={2}"
+Groups[1, 4] := "https://dictionary.cambridge.org/search/english/direct/?q={2}"
+Groups[1, 5] := "https://learnersdictionary.com/definition/{1}"
+Groups[1, 6] := "https://vi.wiktionary.org/wiki/{1}"
+Groups[1, 7] := "https://www.google.com/search?q={2}&tbm=isch"
+
+Groups[2, 1] := "https://www.lexico.com/en/definition/{1}"
+Groups[2, 2] := "https://www.etymonline.com/word/{1}"
+Groups[2, 3] := "https://www.vocabulary.com/dictionary/{1}"
+Groups[2, 4] := "https://www.google.com/search?q=define+{2}"
+
+; Set your commands
+ExecuteThis()
+{
+    Sleep, 750
+    Send, +!{Left}
+    ; Send, +!{Right}
+    Return
+}
+
+Group2Target(Dicts, Query1, Query2)
+{
+    Target := ""
+    Loop % Dicts.MaxIndex()
+    {
+        Dict := Dicts[A_Index]
+        Dict := StrReplace(Dict, "{1}", Query1)
+        Dict := StrReplace(Dict, "{2}", Query2)
+        Target := Target " " Dict
+    }
+
+    Target := SubStr(Target, 2)
+    Return Target
+}
+
+Paste2Search(Index)
+{
     Send, ^c
     Sleep, 250
-    Clipboard1 := Trim(Clipboard)
-    Clipboard2 := Trim(Clipboard)
-    StringUpper, Clipboard1, Clipboard1
-    StringLower, Clipboard2, Clipboard2
-    Clipboard3 := StrReplace(Clipboard2, A_Space, "+")
-    MsgBox, 4, Dictionaries 1, Do a search on "%Clipboard1%"?
+
+    Term := Trim(Clipboard)
+    StringUpper, Term, Term
+
+    MsgBox, 4, Group %Index%, Do a search on "%Term%"?
     IfMsgBox, No
         Return
-    IfMsgBox, Yes
-    {
-        Run, chrome.exe --new-window "https://www.ldoceonline.com/search/direct/?q=%Clipboard3%"
-        Sleep, 250
-        Run, https://www.collinsdictionary.com/search/?dictCode=english&q=%Clipboard3%
-        Sleep, 50
-        Run, https://www.oxfordlearnersdictionaries.com/search/english/?q=%Clipboard3%
-        Sleep, 50
-        Run, https://dictionary.cambridge.org/search/english/direct/?q=%Clipboard3%
-        Sleep, 50
-        Run, https://learnersdictionary.com/definition/%Clipboard2%
-        Sleep, 50
-        Run, https://vi.wiktionary.org/wiki/%Clipboard2%
-        Sleep, 50
-        Run, https://www.google.com/search?q=%Clipboard3%&tbm=isch
-        Sleep, 250
-        Send, ^{Tab}
-    }
-    Send, +!{Left}
-Return
 
-#x::
-    InputBox, Clipboard1, Dictionaries 2, Please enter a term:, , 225, 125
+    Query1 := Trim(Term)
+    StringLower, Query1, Query1
+    Query2 := StrReplace(Query1, A_Space, "+")
+
+    Target := Group2Target(Groups[Index], Query1, Query2)
+    Run, % Browser " " History " " Windows " " Target
+
+    ExecuteThis()
+    Return
+}
+
+Input2Search(Index)
+{
+    InputBox, Term, Group %Index%, Please enter a term:,, 225, 125
     If (ErrorLevel == 1)
         Return
-    Clipboard1 := Trim(Clipboard1)
-    StringLower, Clipboard1, Clipboard1
-    Clipboard2 := StrReplace(Clipboard1, A_Space, "+")
-    Sleep, 250
-    If (ErrorLevel == 0)
-    {
-        Run, chrome.exe --new-window "https://www.ldoceonline.com/search/direct/?q=%Clipboard2%"
-        Sleep, 250
-        Run, https://www.collinsdictionary.com/search/?dictCode=english&q=%Clipboard2%
-        Sleep, 50
-        Run, https://www.oxfordlearnersdictionaries.com/search/english/?q=%Clipboard2%
-        Sleep, 50
-        Run, https://dictionary.cambridge.org/search/english/direct/?q=%Clipboard2%
-        Sleep, 50
-        Run, https://learnersdictionary.com/definition/%Clipboard1%
-        Sleep, 50
-        Run, https://vi.wiktionary.org/wiki/%Clipboard1%
-        Sleep, 50
-        Run, https://www.google.com/search?q=%Clipboard2%&tbm=isch
-        Sleep, 250
-        Send, ^{Tab}
-    }
-    Send, +!{Left}
-Return
 
-#+z::
-    Send, ^c
-    Sleep, 250
-    Clipboard1 := Trim(Clipboard)
-    Clipboard2 := Trim(Clipboard)
-    StringUpper, Clipboard1, Clipboard1
-    StringLower, Clipboard2, Clipboard2
-    Clipboard3 := StrReplace(Clipboard2, A_Space, "+")
-    MsgBox, 4, Dictionaries 3, Do a search on "%Clipboard1%"?
-    IfMsgBox, No
-        Return
-    IfMsgBox, Yes
-    {
-        Run, chrome.exe --new-window "https://www.lexico.com/en/definition/%Clipboard2%"
-        Sleep, 250
-        Run, https://www.etymonline.com/word/%Clipboard2%
-        Sleep, 50
-        Run, https://www.vocabulary.com/dictionary/%Clipboard2%
-        Sleep, 50
-        Run, https://www.google.com/search?q=define+%Clipboard3%
-        Sleep, 250
-        Send, ^{Tab}
-    }
-    Send, +!{Left}
-Return
+    Query1 := Trim(Term)
+    StringLower, Query1, Query1
+    Query2 := StrReplace(Query1, A_Space, "+")
 
-#+x::
-    InputBox, Clipboard1, Dictionaries 4, Please enter a term:, , 225, 125
-    If (ErrorLevel == 1)
-        Return
-    Clipboard1 := Trim(Clipboard1)
-    StringLower, Clipboard1, Clipboard1
-    Clipboard2 := StrReplace(Clipboard1, A_Space, "+")
-    Sleep, 250
-    If (ErrorLevel == 0)
-    {
-        Run, chrome.exe --new-window "https://www.lexico.com/en/definition/%Clipboard1%"
-        Sleep, 250
-        Run, https://www.etymonline.com/word/%Clipboard1%
-        Sleep, 50
-        Run, https://www.vocabulary.com/dictionary/%Clipboard1%
-        Sleep, 50
-        Run, https://www.google.com/search?q=define+%Clipboard2%
-        Sleep, 250
-        Send, ^{Tab}
-    }
-    Send, +!{Left}
-Return
+    Target := Group2Target(Groups[Index], Query1, Query2)
+    Run, % Browser " " History " " Windows " " Target
+
+    ExecuteThis()
+    Return
+}
+
+; Default groups
+#z::Paste2Search(1)
+#x::Input2Search(1)
+
+; Optional groups
+#+z::Paste2Search(2)
+#+x::Input2Search(2)
