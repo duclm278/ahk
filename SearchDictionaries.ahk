@@ -9,8 +9,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 DetectHiddenWindows, On
 
 ; Set your browser
-global Browser := "brave.exe"
-; global Browser := "chrome.exe"
+; global Browser := "brave.exe"
+global Browser := "chrome.exe"
 
 ; Set your arguments
 global History := "-incognito"
@@ -41,19 +41,19 @@ ExecuteThis()
     Return
 }
 
-Group2Target(Dicts, Query1, Query2)
+Group2String(Dicts, Query1, Query2)
 {
-    Target := ""
+    String := ""
     Loop % Dicts.MaxIndex()
     {
-        Dict := Dicts[A_Index]
+        Dict := """" Dicts[A_Index] """"
         Dict := StrReplace(Dict, "{1}", Query1)
         Dict := StrReplace(Dict, "{2}", Query2)
-        Target := Target " " Dict
+        String := String " " Dict
     }
 
-    Target := SubStr(Target, 2)
-    Return Target
+    String := SubStr(String, 2)
+    Return String
 }
 
 Paste2Search(Index)
@@ -72,9 +72,8 @@ Paste2Search(Index)
     StringLower, Query1, Query1
     Query2 := StrReplace(Query1, A_Space, "+")
 
-    Target := Group2Target(Groups[Index], Query1, Query2)
-    Run, % Browser " " History " " Windows " " Target
-
+    URLs := Group2String(Groups[Index], Query1, Query2)
+    Run, % Browser " " History " " Windows " " URLs
     ExecuteThis()
     Return
 }
@@ -89,9 +88,8 @@ Input2Search(Index)
     StringLower, Query1, Query1
     Query2 := StrReplace(Query1, A_Space, "+")
 
-    Target := Group2Target(Groups[Index], Query1, Query2)
-    Run, % Browser " " History " " Windows " " Target
-
+    URLs := Group2String(Groups[Index], Query1, Query2)
+    Run, % Browser " " History " " Windows " " URLs
     ExecuteThis()
     Return
 }
