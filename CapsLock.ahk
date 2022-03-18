@@ -20,7 +20,6 @@ ToggleCapsLock()
     *j::Down
     *k::Up
     *l::Right
-#If
 
-LShift & RShift::ToggleCapsLock()
-RShift & LShift::ToggleCapsLock()
+    *Enter::ToggleCapsLock()
+#If
