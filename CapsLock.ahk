@@ -6,7 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ToggleCapsLock()
 {
     SetCapsLockState, % !GetKeyState("CapsLock", "T")
-    SoundPlay, *-1
+    SoundBeep, 750, 500
     Return
 }
 
