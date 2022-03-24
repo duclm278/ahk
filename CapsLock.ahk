@@ -21,5 +21,5 @@ ToggleCapsLock()
     *k::Up
     *l::Right
 
-    *Enter::ToggleCapsLock()
+    *Space::ToggleCapsLock()
 #If
