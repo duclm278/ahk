@@ -18,7 +18,6 @@ Loop, %ID%
 }
 
 ; Run these scripts
-Run, CapsLock.ahk
-Run, RunOrRise.ahk
-Run, SearchDictionaries.ahk
-Run, SuperScapple.ahk
+Run, "CapsLock.ahk"
+Run, "RunOrRise.ahk"
+Run, "SearchDictionaries.ahk"
