@@ -11,7 +11,7 @@ If (!A_IsAdmin)
     ExitApp
 }
 
-Values := "CT"
+Values := "CTV"
 
 RegRead, Hotkeys, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys
 If (ErrorLevel)
