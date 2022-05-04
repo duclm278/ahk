@@ -8,13 +8,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #WinActivateForce
 DetectHiddenWindows, On
 
-RegRead, Workstation, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation
-If (Workstation != 1)
-{
-    MsgBox, 0, Warning, Please DISABLE locking workstation!
-    ExitApp
-}
-
 RegRead, Hotkeys, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisabledHotkeys
 If (InStr(Hotkeys, "T") == 0)
 {
@@ -54,34 +47,3 @@ RunOrRaiseRegularApps(ClassName, ProcessName, Target)
 #+f::Run, "explorer.exe"
 #+w::Run, "chrome.exe"
 #+t::Run, "wt.exe"
-
-; Vim-like mappings
-#If, GetKeyState("LWin", "P")
-    *h::Left
-    *j::Down
-    *k::Up
-    *l::Right
-#If
-
-; Reload all
-#+r::
-    WinGet, ID, List, ahk_class AutoHotkey
-    Loop, %ID%
-    {
-        ThisID := ID%A_Index%
-        WinGetTitle, Title, % "ahk_id " ThisID
-        If (InStr(Title, A_ScriptFullPath) == 0)
-            PostMessage, 0x0111, 65303,,, % "ahk_id " ThisID
-    }
-    Reload
-Return
-
-; Other mappings
-#a::Winset, AlwaysOnTop,, A
-
-#+q::WinClose, A
-#+v::
-    Clipboard = %Clipboard%
-    Send, ^v
-    Sleep, 50
-Return
