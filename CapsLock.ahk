@@ -7,24 +7,25 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, Force
 #WinActivateForce
 DetectHiddenWindows, On
+SetCapsLockState, AlwaysOff
 
-ToggleCapsLock()
-{
-    SetCapsLockState, % !GetKeyState("CapsLock", "T")
-    SoundBeep, 750, 500
-    Return
-}
+CapsLock::Send, {Esc}
 
-*CapsLock::Return
-#If, GetKeyState("CapsLock", "P")
-    a::Home
-    e::End
+CapsLock & a::Home
+CapsLock & e::End
+CapsLock & o::AppsKey
 
-    [::Esc
-    h::Left
-    j::Down
-    k::Up
-    l::Right
+CapsLock & [::Esc
+CapsLock & h::Left
+CapsLock & j::Down
+CapsLock & k::Up
+CapsLock & l::Right
 
-    Space::ToggleCapsLock()
-#If
+CapsLock & Space::
+    If (GetKeyState("CapsLock", "T") == 0)
+        SetCapsLockState, AlwaysOn
+    Else
+        SetCapsLockState, AlwaysOff
+
+    KeyWait, Space
+Return
