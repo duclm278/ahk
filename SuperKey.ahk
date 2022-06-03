@@ -16,12 +16,8 @@ If (Workstation != 1)
 }
 
 ; Vim-like mappings
-#If, GetKeyState("LWin", "P")
-    *h::Left
-    *j::Down
-    *k::Up
-    *l::Right
-#If
+#^h::Send, #^{Left}
+#^l::Send, #^{Right}
 
 ; Reload all
 #+r::

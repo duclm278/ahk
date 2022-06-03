@@ -17,14 +17,14 @@ ToggleCapsLock()
 
 *CapsLock::Return
 #If, GetKeyState("CapsLock", "P")
-    *a::Home
-    *e::End
+    a::Home
+    e::End
 
-    *[::Esc
-    *h::Left
-    *j::Down
-    *k::Up
-    *l::Right
+    [::Esc
+    h::Left
+    j::Down
+    k::Up
+    l::Right
 
-    *Space::ToggleCapsLock()
+    Space::ToggleCapsLock()
 #If
