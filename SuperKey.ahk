@@ -15,7 +15,11 @@ If (Workstation != 1)
     ExitApp
 }
 
-; Vim-like mappings
+; Simple keymaps
+#j::Send, #{Down}
+#k::Send, #{Up}
+
+; Change desktops
 #^h::Send, #^{Left}
 #^l::Send, #^{Right}
 
@@ -33,8 +37,6 @@ If (Workstation != 1)
 Return
 
 ; Other mappings
-#a::Winset, AlwaysOnTop,, A
-
 #+q::WinClose, A
 #+v::
     Clipboard = %Clipboard%

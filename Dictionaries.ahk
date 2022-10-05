@@ -36,8 +36,8 @@ Groups[2, 4] := "https://www.google.com/search?q=define+{2}"
 ExecuteThis()
 {
     Sleep, 750
-    Send, +!{Left}
-    ; Send, +!{Right}
+    Send, +!h
+    ; Send, +!l
     Return
 }
 
