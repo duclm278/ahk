@@ -8,13 +8,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #WinActivateForce
 DetectHiddenWindows, On
 
-RegRead, Workstation, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation
-If (Workstation != 1)
-{
-    MsgBox, 0, Warning, Please DISABLE locking workstation!
-    ExitApp
-}
-
 ; Simple keymaps
 #j::Send, #{Down}
 #k::Send, #{Up}
