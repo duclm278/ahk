@@ -20,5 +20,4 @@ Loop, %ID%
 ; Run these scripts
 Run, "CapsLock.ahk"
 Run, "Dictionaries.ahk"
-; Run, "RunOrRise.ahk"
 Run, "SuperKey.ahk"
