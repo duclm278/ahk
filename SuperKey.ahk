@@ -30,6 +30,8 @@ DetectHiddenWindows, On
 Return
 
 ; Other mappings
+#a::Winset, AlwaysOnTop,, A
+
 #+q::WinClose, A
 #+v::
     Clipboard = %Clipboard%
