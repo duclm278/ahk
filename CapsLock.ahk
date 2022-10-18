@@ -11,7 +11,7 @@ DetectHiddenWindows, On
 ToggleCapsLock()
 {
     SetCapsLockState, % !GetKeyState("CapsLock", "T")
-    SoundBeep, 750, 500
+    ; SoundBeep, 750, 500
     Return
 }
 
