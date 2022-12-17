@@ -27,10 +27,10 @@ Groups[1, 5] := "https://learnersdictionary.com/definition/{1}"
 Groups[1, 6] := "https://vi.wiktionary.org/wiki/{1}"
 Groups[1, 7] := "https://www.google.com/search?q={2}&tbm=isch"
 
-Groups[2, 1] := "https://www.lexico.com/en/definition/{1}"
+Groups[2, 1] := "https://www.google.com/search?q=define+{2}"
 Groups[2, 2] := "https://www.etymonline.com/word/{1}"
 Groups[2, 3] := "https://www.vocabulary.com/dictionary/{1}"
-Groups[2, 4] := "https://www.google.com/search?q=define+{2}"
+Groups[2, 4] := "https://www.google.com/search?q={2}&tbm=isch"
 
 ; Set your commands
 ExecuteThis()
@@ -95,9 +95,9 @@ Input2Search(Index)
 }
 
 ; Default groups
-#z::Paste2Search(1)
-#x::Input2Search(1)
+#z::Input2Search(1)
+#c::Paste2Search(1)
 
 ; Optional groups
-#+z::Paste2Search(2)
-#+x::Input2Search(2)
+#+z::Input2Search(2)
+#+c::Paste2Search(2)
